@@ -1,7 +1,9 @@
 defmodule Aoc2018.Day25 do
-	def part_one() do
+	def part_one(input) do
+		input
 	end
 
-	def part_two() do
+	def part_two(input) do
+		input
 	end
 end
