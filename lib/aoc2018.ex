@@ -1,10 +1,9 @@
 defmodule Aoc2018 do
-  def padded_number(number) do
-    number
-      |> Integer.to_string
-      |> String.pad_leading(2, "0")
-  end
+  def padded_number(n) when is_integer(n), do: padded_number(Integer.to_string(n))
+  def padded_number(n) when is_binary(n), do: String.pad_leading(n, 2, "0")
 
+  def run([]), do: run()
+  def run([n]), do: run(n)
   def run(), do: Enum.each 1..25, fn(day) -> run(day) end
   def run(number) do
     IO.puts "Challenge #{padded_number(number)}"
