@@ -5,16 +5,26 @@ defmodule Aoc2018 do
   def run(), do: Enum.each 1..25, fn(day) -> run(day) end
   def run([]), do: run()
   def run([n]), do: run(n)
+
   def run(number) do
+    case input(number) do
+      :incomplete -> :incomplete
+      input -> run(number, input)
+    end
+  end
+
+  def run(number, input) do
     IO.puts "Challenge #{padded_number(number)}"
     IO.write "  Part One: "
-    IO.puts :"Elixir.Aoc2018.Day#{padded_number(number)}".part_one(input(number))
+    IO.puts :"Elixir.Aoc2018.Day#{padded_number(number)}".part_one(input)
     IO.write "  Part Two: "
-    IO.puts :"Elixir.Aoc2018.Day#{padded_number(number)}".part_two(input(number))
+    IO.puts :"Elixir.Aoc2018.Day#{padded_number(number)}".part_two(input)
   end
 
   def input(number) do
-    File.read!("input/#{padded_number(number)}.txt")
-      |> String.replace_trailing("\n", "")
+    case File.read("input/#{padded_number(number)}.txt") do
+      {:ok, input} -> String.replace_trailing(input, "\n", "")
+      {:error, _} -> :incomplete
+    end
   end
 end

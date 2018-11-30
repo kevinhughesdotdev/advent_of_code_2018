@@ -7,23 +7,23 @@ defmodule Aoc2018.Day${DAY}Test do
 	use ExUnit.Case
 
 	test "Part One" do
-		assert Aoc2018.Day${DAY}.part_one(nil) == nil
+		assert Aoc2018.Day${DAY}.part_one(nil) == :incomplete
 	end
 
 	test "Part Two" do
-		assert Aoc2018.Day${DAY}.part_one(nil) == nil
+		assert Aoc2018.Day${DAY}.part_one(nil) == :incomplete
 	end
 end
 EOF
 
 cat <<EOF > lib/Aoc2018/Day${DAY}.ex
 defmodule Aoc2018.Day${DAY} do
-	def part_one(input) do
-		input
+	def part_one(_input) do
+		:incomplete
 	end
 
-	def part_two(input) do
-		input
+	def part_two(_input) do
+		:incomplete
 	end
 end
 EOF
