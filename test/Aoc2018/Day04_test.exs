@@ -6,6 +6,6 @@ defmodule Aoc2018.Day04Test do
 	end
 
 	test "Part Two" do
-		assert Aoc2018.Day04.part_one(nil) == :incomplete
+		assert Aoc2018.Day04.part_two(nil) == :incomplete
 	end
 end

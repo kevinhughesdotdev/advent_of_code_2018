@@ -11,7 +11,7 @@ defmodule Aoc2018.Day${DAY}Test do
 	end
 
 	test "Part Two" do
-		assert Aoc2018.Day${DAY}.part_one(nil) == :incomplete
+		assert Aoc2018.Day${DAY}.part_two(nil) == :incomplete
 	end
 end
 EOF

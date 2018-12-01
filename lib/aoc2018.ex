@@ -1,6 +1,5 @@
 defmodule Aoc2018 do
   @grey  IO.ANSI.color(1,1,1)
-  @ehite IO.ANSI.color(5,5,5)
 
   def padded_number(n) when is_integer(n), do: padded_number(Integer.to_string(n))
   def padded_number(n) when is_binary(n), do: String.pad_leading(n, 2, "0")
