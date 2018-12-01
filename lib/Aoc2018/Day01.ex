@@ -13,11 +13,11 @@ defmodule Aoc2018.Day01 do
     process(input, nil, input, 0)
   end
 
-  def process(input, frequencies, [], freq), do: process(input, frequencies, input, freq)
-  def process(input, frequencies, [inst|tail], freq) do
+  defp process(input, nil, inst, freq), do: process(input, MapSet.new([0, freq]), inst, freq)
+  defp process(input, frequencies, [], freq), do: process(input, frequencies, input, freq)
+  defp process(input, frequencies, [inst|tail], freq) do
     freq = freq + inst
     cond do
-      frequencies == nil -> process(input, MapSet.new([0, freq]), tail, freq)
       MapSet.member?(frequencies, freq) -> freq
       true -> process(input, MapSet.put(frequencies, freq), tail, freq)
     end
