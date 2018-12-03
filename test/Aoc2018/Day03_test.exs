@@ -11,7 +11,12 @@ defmodule Aoc2018.Day03Test do
 	end
 
 	test "Part Two" do
-		assert Aoc2018.Day03.part_two(nil) == :incomplete
+		input = """
+						#1 @ 1,3: 4x4
+						#2 @ 3,1: 4x4
+						#3 @ 5,5: 2x2
+						"""
+		assert Aoc2018.Day03.part_two(input) == 3
 	end
 
 	test "squares" do
@@ -25,5 +30,6 @@ defmodule Aoc2018.Day03Test do
 
 	test "process line" do
 		assert Aoc2018.Day03.process_line("#8 @ 493,771: 20x25") == {493,771,20,25}
+		assert Aoc2018.Day03.process_line("#8 @ 493,771: 20x25", true) == {8, 493,771,20,25}
 	end
 end
