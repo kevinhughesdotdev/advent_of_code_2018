@@ -1,16 +1,35 @@
 defmodule Aoc2018.Day05 do
   def part_one(input) do
-    String.length(smash(input))
+    String.length(chunk_and_process(input, 100))
   end
 
   def part_two(_input) do
     :incomplete
   end
 
+  def chunk_and_process(string, chunk) do
+    tasks = string
+    |> String.graphemes
+    |> Enum.chunk_every(chunk)
+    |> Enum.map(fn letters ->
+      letters = Enum.join(letters)
+      Task.async(fn -> smash(letters) end)
+    end)
+
+    processed = Enum.map(tasks, fn task -> Task.await(task) end)
+    |> Enum.join
+
+    case chunk do
+      2 -> string
+      _ -> case processed do
+            ^string -> chunk_and_process(processed, chunk - 1)
+            _ -> chunk_and_process(processed, chunk)
+          end
+    end
+  end
+
   def smash(""), do: ""
   def smash(string) do
-    len = IO.inspect(String.length(string))
-    if len < 100, do: IO.inspect(string), else: IO.inspect(len)
     smashed = smash_once(string)
     case smashed do
       ^string -> string
