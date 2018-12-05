@@ -1,10 +1,18 @@
 defmodule Aoc2018.Day05 do
   def part_one(input) do
-    String.length(chunk_and_process(input, 100))
+    String.length(chunk_and_process(input, 60))
   end
 
-  def part_two(_input) do
-    :incomplete
+  def part_two(input) do
+    alphabet = for l <- ?a..?z, do: <<l :: utf8>>
+
+    for l <- alphabet do
+      IO.write l
+      fixed_input = input
+      |> String.replace(l, "")
+      |> String.replace(String.upcase(l), "")
+      String.length(chunk_and_process(chunk_and_process(fixed_input, 100), 100))
+    end |> Enum.min
   end
 
   def chunk_and_process(string, chunk) do

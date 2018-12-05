@@ -10,7 +10,7 @@ defmodule Aoc2018.Day05Test do
 	end
 
 	test "Part Two" do
-		assert Aoc2018.Day05.part_two(nil) == :incomplete
+		assert Aoc2018.Day05.part_two("dabAcCaCBAcCcaDA") == 4
 	end
 
 	test "Smash once" do
