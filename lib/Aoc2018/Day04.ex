@@ -23,8 +23,6 @@ defmodule Aoc2018.Day04 do
 
   def part_two(input) do
     cal = build_cal(input)
-
-    cal = cal
     |> Enum.filter(fn x -> elem(x, 3) == :asleep end)
 
     best = for m <- 0..59, into: %{} do
