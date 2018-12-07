@@ -55,6 +55,6 @@ defmodule Aoc2018.Day07Test do
 	end
 
 	test "Part Two" do
-		assert Aoc2018.Day07.part_two(nil) == :incomplete
+		assert Aoc2018.Day07.part_two(@input, 2, 0) == 15
 	end
 end
