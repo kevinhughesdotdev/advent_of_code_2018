@@ -3,25 +3,21 @@ defmodule Aoc2018.Day06 do
     map = create_map(input)
     [[min_x, max_x], [min_y, max_y]] = map_boundaries(map)
 
-    map =
-      for x <- min_x..max_x do
-        for y <- min_y..max_y, do: closest_loc(map, map, x, y)
-      end
-      |> List.flatten
+    map = List.flatten (
+      for x <- min_x..max_x, y <- min_y..max_y, do: closest_loc(map, map, x, y)
+    )
 
     infinite = Enum.filter(map, fn {x, y, _, t} ->
       t == nil && (x == min_x || x == max_x || y == min_y || y == max_y)
     end)
-    |> Enum.map(fn x -> elem(x,2) end)
+    |> Enum.map(&elem(&1,2))
     |> MapSet.new
 
     map
     |> Enum.filter(fn {_, _, l, _} -> !MapSet.member?(infinite, l) end)
     |> Enum.group_by(fn {_, _, l, _} -> l end)
     |> Enum.map(fn {_, v} -> Enum.count(v) end)
-    |> Enum.sort
-    |> Enum.reverse
-    |> List.first
+    |> Enum.max
   end
 
   def part_two(input, region \\ 10000) do
