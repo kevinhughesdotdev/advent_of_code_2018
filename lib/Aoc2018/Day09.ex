@@ -6,25 +6,18 @@ defmodule Aoc2018.Day09 do
 
     players = List.duplicate(0, String.to_integer(players)) |> List.to_tuple
 
-    scores = play([0], 1, 0, players, String.to_integer(last))
+    IO.inspect(play([0], 1, 0, players, String.to_integer(last)))
   end
 
   def part_two(input) do
-    [players, _, _, _, _, _, last, _] =
-      input
-      |> String.split
-
-    players = List.duplicate(0, String.to_integer(players)) |> List.to_tuple
-
-    scores = play([0], 1, 0, players, String.to_integer(last) * 100)
+    :incomplete
   end
 
   def play(circle, round, current, players, last) do
     player = rem(round, tuple_size(players))
-    a = cond do
+    cond do
       round == last ->
-        IO.inspect players
-        IO.puts players |> Tuple.to_list |> Enum.max
+        players |> Tuple.to_list |> Enum.max
       rem(round, 23) == 0 ->
         IO.inspect [{round, players |> Tuple.to_list |> Enum.max}]
         players = put_elem(players, player, elem(players, player) + round)
@@ -40,7 +33,6 @@ defmodule Aoc2018.Day09 do
         {left, right} = Enum.split(circle, new_index)
         new_circle = left ++ [round] ++ right
         play(new_circle, round + 1, round, players, last)
-        player = rem(round, tuple_size(players))
     end
   end
 
