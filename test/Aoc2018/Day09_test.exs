@@ -6,14 +6,13 @@ defmodule Aoc2018.Day09Test do
 
 	test "Part One" do
 		assert Aoc2018.Day09.part_one(@input1) == 32
-		# assert Aoc2018.Day09.part_one(10) == 8317
-		# assert Aoc2018.Day09.part_one(13) == 146373
-		# assert Aoc2018.Day09.part_one(17) == 2764
-		# assert Aoc2018.Day09.part_one(21) == 54718
-		# assert Aoc2018.Day09.part_one(30) == 37305
+		assert Aoc2018.Day09.part_one("10 players; last marble is worth 1618 points") == 8317
+		assert Aoc2018.Day09.part_one("13 players; last marble is worth 7999 points") == 146373
+		assert Aoc2018.Day09.part_one("21 players; last marble is worth 6111 points") == 54718
+		assert Aoc2018.Day09.part_one("30 players; last marble is worth 5807 points") == 37305
 	end
 
 	test "Part Two" do
-		assert Aoc2018.Day09.part_two(@input1) == 0
+		assert Aoc2018.Day09.part_two(@input1) == 22563
 	end
 end

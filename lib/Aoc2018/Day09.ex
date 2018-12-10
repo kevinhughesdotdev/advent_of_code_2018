@@ -16,10 +16,10 @@ defmodule Aoc2018.Day09 do
 
     players = List.duplicate(0, String.to_integer(players)) |> List.to_tuple
 
-    play([0], 1, 0, players, String.to_integer(last * 100))
+    play([0], 1, 0, players, String.to_integer(last) * 100)
   end
 
-  def play(circle, round, current, players, last, index) do
+  def play(circle, round, current, players, last) do
     player = rem(round, tuple_size(players))
     cond do
       round == last ->
