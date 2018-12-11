@@ -2,7 +2,7 @@ defmodule Aoc2018.Day11Test do
 	use ExUnit.Case
 
 	test "Part One" do
-		assert Aoc2018.Day11.part_one("5468") == "493,64"
+		assert Aoc2018.Day11.part_one("5468") == "243,64"
 	end
 
 	test "power level" do
@@ -20,7 +20,12 @@ defmodule Aoc2018.Day11Test do
 		]
 	end
 
+	test "square power" do
+		assert Aoc2018.Day11.square_power(Aoc2018.Day11.build_grid(18), 90, 269, 16) == 113
+		assert Aoc2018.Day11.square_power(Aoc2018.Day11.build_grid(42), 232, 251, 12) == 119
+	end
+
 	test "Part Two" do
-		assert Aoc2018.Day11.part_two(nil) == :incomplete
+		# assert Aoc2018.Day11.part_two("18") == "90,269,16"
 	end
 end
