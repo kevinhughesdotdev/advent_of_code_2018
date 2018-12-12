@@ -3,8 +3,8 @@ defmodule Aoc2018.Day12 do
     {pots, rules} = parse(input)
 
     generation(pots, rules, 20, -2, %{})
-    |> Enum.filter(fn {k, v} -> v == "#" end)
-    |> Enum.map(fn {k, v} -> k end)
+    |> Enum.filter(fn {_, v} -> v == "#" end)
+    |> Enum.map(fn {k, _} -> k end)
     |> Enum.sum()
   end
 
@@ -22,8 +22,8 @@ defmodule Aoc2018.Day12 do
     # results
     result =
       generation(pots, rules, 100, -2, %{})
-      |> Enum.filter(fn {k, v} -> v == "#" end)
-      |> Enum.map(fn {k, v} -> k end)
+      |> Enum.filter(fn {_, v} -> v == "#" end)
+      |> Enum.map(fn {k, _} -> k end)
       |> Enum.sum()
 
     # Using the commented out code above I found that the answer increases by 51
@@ -35,17 +35,16 @@ defmodule Aoc2018.Day12 do
   def generation(pots, _, 0, _, _), do: pots
 
   def generation(pots, rules, g, pot, next_gen) do
-    pots =
-      cond do
-        pot > (pots |> Map.keys() |> Enum.max()) + 2 ->
-          # IO.inspect {pots |> Map.keys |> Enum.min, g, pots |> Enum.map(fn {k,v} -> {k,v} end) |> Enum.sort_by(&elem(&1,0)) |> Enum.map(&elem(&1,1)) |> Enum.join }
-          generation(next_gen, rules, g - 1, (pots |> Map.keys() |> Enum.min()) - 2, %{})
+    cond do
+      pot > (pots |> Map.keys() |> Enum.max()) + 2 ->
+        # IO.inspect {pots |> Map.keys |> Enum.min, g, pots |> Enum.map(fn {k,v} -> {k,v} end) |> Enum.sort_by(&elem(&1,0)) |> Enum.map(&elem(&1,1)) |> Enum.join }
+        generation(next_gen, rules, g - 1, (pots |> Map.keys() |> Enum.min()) - 2, %{})
 
-        true ->
-          rule = for(x <- (pot - 2)..(pot + 2), do: Map.get(pots, x, ".")) |> Enum.join()
-          next_gen = Map.put(next_gen, pot, Map.get(rules, rule, "."))
-          generation(pots, rules, g, pot + 1, next_gen)
-      end
+      true ->
+        rule = for(x <- (pot - 2)..(pot + 2), do: Map.get(pots, x, ".")) |> Enum.join()
+        next_gen = Map.put(next_gen, pot, Map.get(rules, rule, "."))
+        generation(pots, rules, g, pot + 1, next_gen)
+    end
   end
 
   # ONLY APPLY RULES TO THE CURRENT GEN BEFORE STARTING THE NEXT GEN

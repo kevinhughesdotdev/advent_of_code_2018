@@ -8,7 +8,7 @@ defmodule Aoc2018.Day10 do
     sky |> to_grid(minmax(sky))
   end
 
-  def part_two(input) do
+  def part_two(_) do
     # Had to work this out by eye, really.
     10076
   end

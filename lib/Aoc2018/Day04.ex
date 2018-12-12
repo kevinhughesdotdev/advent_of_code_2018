@@ -85,7 +85,7 @@ defmodule Aoc2018.Day04 do
         end
       end) || {date, min, guard, state}
 
-    {date, min, guard, state} = nl
+    {_, _, guard, state} = nl
     [nl | add_to_cal(t, log, guard, state)]
   end
 
