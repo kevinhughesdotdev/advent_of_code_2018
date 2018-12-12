@@ -1,8 +1,9 @@
 defmodule Aoc2018.Day10 do
   def part_one(input, steps \\ 10078) do
-    sky = input
-    |> parse
-    |> step(steps)
+    sky =
+      input
+      |> parse
+      |> step(steps)
 
     sky |> to_grid(minmax(sky))
   end
@@ -18,9 +19,9 @@ defmodule Aoc2018.Day10 do
     |> String.split("\n")
     |> Enum.map(fn line ->
       Regex.scan(~r/[-\d]+/, line)
-      |> List.flatten
+      |> List.flatten()
       |> Enum.map(&String.to_integer/1)
-      |> List.to_tuple
+      |> List.to_tuple()
     end)
   end
 
@@ -31,6 +32,7 @@ defmodule Aoc2018.Day10 do
   end
 
   def step(sky, 0), do: sky
+
   def step(sky, iterations \\ 1) do
     # if iterations < 40, do: to_grid(sky, minmax(sky))
     sky = for {x, y, dx, dy} <- sky, do: {x + dx, y + dy, dx, dy}
@@ -38,13 +40,16 @@ defmodule Aoc2018.Day10 do
   end
 
   def to_grid(sky, {minx, maxx, miny, maxy}) do
-    sky = for y <- miny..maxy, x <- minx..(maxx + 1) do
-      if x == maxx + 1 do
-        "\n"
-      else
-        if Enum.find(sky, fn {sx,sy, _, _} -> sx == x && sy == y end), do: "#", else: "."
+    sky =
+      for y <- miny..maxy, x <- minx..(maxx + 1) do
+        if x == maxx + 1 do
+          "\n"
+        else
+          if Enum.find(sky, fn {sx, sy, _, _} -> sx == x && sy == y end), do: "#", else: "."
+        end
       end
-    end |> Enum.join
+      |> Enum.join()
+
     # IO.puts "------------------------------------------------------"
     # IO.puts sky
     # IO.puts "------------------------------------------------------"

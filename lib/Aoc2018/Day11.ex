@@ -10,10 +10,11 @@ defmodule Aoc2018.Day11 do
   def power_level(x, y, serial) do
     (
       rackID = x + 10
-      (((y * rackID) + serial) * rackID)
-      |> Integer.to_string
+
+      ((y * rackID + serial) * rackID)
+      |> Integer.to_string()
       |> String.slice(-3, 1)
-      |> String.to_integer
+      |> String.to_integer()
     ) - 5
   end
 
@@ -25,23 +26,29 @@ defmodule Aoc2018.Day11 do
     grid
     |> Enum.slice(y - 1, size)
     |> Enum.map(fn row -> Enum.slice(row, x - 1, size) end)
-    |> List.flatten
-    |> Enum.sum
+    |> List.flatten()
+    |> Enum.sum()
   end
 
   def build_grid(serial) do
-    for y <- 1..300, do: for x <- 1..300, do: power_level(x, y, serial)
+    for y <- 1..300, do: for(x <- 1..300, do: power_level(x, y, serial))
   end
 
   def part_two(input) do
     serial = String.to_integer(input)
     grid = build_grid(serial)
-    tasks = for size <- 1..300 do
-      Task.async(fn ->
-        squares = for y <- 1..(301 - size), x <- 1..(301 - size), do: {x, y, size, square_power(grid, x, y, size)}
-        Enum.max_by(squares, &elem(&1, 3))
-      end)
-    end
+
+    tasks =
+      for size <- 1..300 do
+        Task.async(fn ->
+          squares =
+            for y <- 1..(301 - size),
+                x <- 1..(301 - size),
+                do: {x, y, size, square_power(grid, x, y, size)}
+
+          Enum.max_by(squares, &elem(&1, 3))
+        end)
+      end
 
     squares = Enum.map(tasks, fn task -> Task.await(task, :infinity) end)
 
