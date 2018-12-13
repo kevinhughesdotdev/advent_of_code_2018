@@ -44,12 +44,11 @@ defmodule Aoc2018.Day03 do
   def squares({_, x, y, w, h}), do: squares({x, y, w, h})
 
   def squares({x, y, w, h}) do
-    for x <- x..(x + w - 1) do
-      for y <- y..(y + h - 1) do
-        {x, y}
-      end
-    end
-    |> List.flatten()
+    for(
+      x <- x..(x + w - 1),
+      y <- y..(y + h - 1),
+      do: {x, y}
+    )
     |> MapSet.new()
   end
 
