@@ -1,0 +1,34 @@
+#!/bin/env ruby
+# frozen_string_literal: true
+
+require 'thor'
+require 'require_all'
+require 'rake/testtask'
+require_rel 'lib/aoc2018'
+
+def challenge(day)
+  day_padded = day.to_s.rjust(2, '0')
+  puts "Challenge Day #{day_padded}"
+  input = IO.read("../input/#{day_padded}.txt")
+  challenge = Kernel.const_get("Aoc2018::Day#{day_padded}")
+  puts "Part One: #{challenge.part_one(input)}"
+  puts "Part Two: #{challenge.part_two(input)}"
+rescue Errno::ENOENT
+  puts 'Incomplete'
+end
+
+task default: :test
+
+desc 'Run challenge 1'
+task 'challenge', [:day] do |_, args|
+  challenge(args.day)
+end
+
+desc 'Run all challenges'
+task 'challenges' do
+  1.upto(24) { |day| challenge(day) }
+end
+
+Rake::TestTask.new do |task|
+  task.pattern = 'test/aoc2018/*_test.rb'
+end
