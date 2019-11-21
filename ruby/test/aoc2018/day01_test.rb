@@ -11,7 +11,11 @@ module Aoc2018::Test
     end
 
     def test_part_two
-      assert_equal Aoc2018::Day01.part_one(nil), :incomplete
+      assert_equal Aoc2018::Day01.part_two("+1\n-2\n+3\n+1"), 2
+      assert_equal Aoc2018::Day01.part_two("+1\n-1"), 0
+      assert_equal Aoc2018::Day01.part_two("+3\n+3\n+4\n-2\n-4"), 10
+      assert_equal Aoc2018::Day01.part_two("-6\n+3\n+8\n+5\n-6"), 5
+      assert_equal Aoc2018::Day01.part_two("+7\n+7\n-2\n-7\n-4"), 14
     end
   end
 end
