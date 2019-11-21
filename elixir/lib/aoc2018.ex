@@ -24,7 +24,7 @@ defmodule Aoc2018 do
   end
 
   def input(number) do
-    case File.read("input/#{padded_number(number)}.txt") do
+    case File.read("../input/#{padded_number(number)}.txt") do
       {:ok, input} -> String.replace_trailing(input, "\n", "")
       {:error, _} -> :incomplete
     end
