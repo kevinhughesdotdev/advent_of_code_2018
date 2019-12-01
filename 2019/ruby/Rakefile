@@ -21,12 +21,11 @@ task default: :test
 
 desc 'Run challenge 1'
 task 'challenge', [:day] do |_, args|
-  challenge(args.day)
-end
-
-desc 'Run all challenges'
-task 'challenges' do
-  1.upto(24) { |day| challenge(day) }
+  if args.day
+    challenge(args.day)
+  else
+    1.upto(24) { |day| challenge(day) }
+  end
 end
 
 Rake::TestTask.new do |task|
