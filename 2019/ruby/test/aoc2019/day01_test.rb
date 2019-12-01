@@ -15,7 +15,10 @@ module Aoc2019::Test
     end
 
     def test_part_two
-      assert_equal Aoc2019::Day01.part_two(nil), :incomplete
+      assert_equal 2, Aoc2019::Day01.line2(12)
+      assert_equal 2, Aoc2019::Day01.line2(14)
+      assert_equal 966, Aoc2019::Day01.line2(1969)
+      assert_equal 50346, Aoc2019::Day01.line2(100756)
     end
   end
 end
