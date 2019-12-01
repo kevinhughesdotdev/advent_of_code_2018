@@ -18,9 +18,13 @@ defmodule Aoc2019 do
   def run(number, input) do
     IO.puts("Challenge #{padded_number(number)}")
     IO.write("  Part One: ")
-    IO.puts(:"Elixir.Aoc2019.Day#{padded_number(number)}".part_one(input))
+    time = Time.utc_now()
+    IO.write(:"Elixir.Aoc2019.Day#{padded_number(number)}".part_one(input))
+    IO.puts("\t#{Time.diff(Time.utc_now(), time, :microsecond)}ms")
+    time = Time.utc_now()
     IO.write("  Part Two: ")
-    IO.puts(:"Elixir.Aoc2019.Day#{padded_number(number)}".part_two(input))
+    IO.write(:"Elixir.Aoc2019.Day#{padded_number(number)}".part_two(input))
+    IO.puts("\t#{Time.diff(Time.utc_now(), time, :microsecond)}ms")
   end
 
   def input(number) do
