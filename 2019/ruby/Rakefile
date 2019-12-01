@@ -1,7 +1,6 @@
 #!/bin/env ruby
 # frozen_string_literal: true
 
-require 'thor'
 require 'require_all'
 require 'rake/testtask'
 require_rel 'lib/aoc2019'
@@ -11,8 +10,10 @@ def challenge(day)
   puts "Challenge Day #{day_padded}"
   input = IO.read("../input/#{day_padded}.txt")
   challenge = Kernel.const_get("Aoc2019::Day#{day_padded}")
-  puts "Part One: #{challenge.part_one(input)}"
-  puts "Part Two: #{challenge.part_two(input)}"
+  time = Time.now
+  puts "Part One: #{challenge.part_one(input)}\t#{(Time.now - time) * 1000000}ms"
+  time = Time.now
+  puts "Part Two: #{challenge.part_two(input)}\t#{(Time.now - time) * 1000000}ms"
 rescue Errno::ENOENT
   puts 'Incomplete'
 end
