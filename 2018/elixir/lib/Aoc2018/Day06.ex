@@ -12,6 +12,16 @@ defmodule Aoc2018.Day06 do
       |> Enum.map(&elem(&1, 2))
       |> MapSet.new()
 
+    IO.puts("")
+
+    # for x <- min_x..max_x do
+    #   map
+    #   |> Enum.filter(fn {map_x, _, _, _} -> map_x == x end)
+    #   |> Enum.map(fn {_, _, l, _} -> if l == nil, do: " ", else: <<l + 65::utf8>> end)
+    #   |> Enum.join()
+    #   |> IO.puts()
+    # end
+
     map
     |> Enum.filter(fn {_, _, l, _} -> !MapSet.member?(infinite, l) end)
     |> Enum.group_by(fn {_, _, l, _} -> l end)
