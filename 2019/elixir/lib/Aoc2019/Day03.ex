@@ -1,12 +1,16 @@
 defmodule Aoc2019.Day03 do
   def path(x, y, "L" <> count) do
     count = String.to_integer(count)
-    (x - 1)..(x - count) |> Enum.map(fn xs -> {xs, y} end)
+
+    (x - 1)..(x - count)
+    |> Enum.map(fn xs -> {xs, y} end)
   end
 
   def path(x, y, "R" <> count) do
     count = String.to_integer(count)
-    (x + 1)..(x + count) |> Enum.map(fn xs -> {xs, y} end)
+
+    (x + 1)..(x + count)
+    |> Enum.map(fn xs -> {xs, y} end)
   end
 
   def path(x, y, "D" <> count) do
@@ -25,8 +29,12 @@ defmodule Aoc2019.Day03 do
 
   def path([h | t], x, y, coords \\ []) do
     new_coords = path(x, y, h)
+    # IO.inspect("-----------------------------")
+    # IO.inspect(h)
+    # IO.inspect(new_coords)
     {newx, newy} = List.last(new_coords)
-    path(t, newx, newy, new_coords ++ coords)
+
+    path(t, newx, newy, coords ++ new_coords)
   end
 
   def part_one(input) do
@@ -42,7 +50,23 @@ defmodule Aoc2019.Day03 do
     |> Enum.min()
   end
 
-  def part_two(_input) do
-    :incomplete
+  def part_two(input) do
+    coords =
+      input
+      |> String.split("\n")
+      |> Enum.map(fn w -> String.split(w, ",") end)
+      |> Enum.map(&path/1)
+
+    intersections = apply(MapSet, :intersection, Enum.map(coords, &MapSet.new/1))
+
+    intersections
+    |> Enum.map(fn i ->
+      Enum.map(coords, fn l -> Enum.find_index(l, fn x -> x == i end) + 1 end)
+    end)
+    |> Enum.map(&Enum.sum/1)
+    |> Enum.min()
+
+    # |> Enum.map(fn i -> Enum.map(coords, fn l -> Enum.find_index(l, fn x -> x == i end) end) end)
+    # |> Enum.map(&Enum.sum/1)
   end
 end
