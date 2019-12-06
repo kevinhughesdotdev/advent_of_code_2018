@@ -20,11 +20,11 @@ defmodule Aoc2019 do
     IO.write("  Part One: ")
     time = Time.utc_now()
     IO.write(:"Elixir.Aoc2019.Day#{padded_number(number)}".part_one(input))
-    IO.puts("\t#{Time.diff(Time.utc_now(), time, :microsecond)}ms")
+    IO.puts("\t#{Time.diff(Time.utc_now(), time, :millisecond) / 100}s")
     time = Time.utc_now()
     IO.write("  Part Two: ")
     IO.write(:"Elixir.Aoc2019.Day#{padded_number(number)}".part_two(input))
-    IO.puts("\t#{Time.diff(Time.utc_now(), time, :microsecond)}ms")
+    IO.puts("\t#{Time.diff(Time.utc_now(), time, :millisecond) / 1000}s")
   end
 
   def input(number) do
